@@ -65,7 +65,13 @@ optional arguments:
 ```
 
 ## Example run
-One set of images is provided in the [holiday](holiday) folder.
+One set of images is provided in the [holiday](holiday) folder.  The example
+command below will generate `30` boards with `6` games in the game
+file `games.txt`.
+
+```
+python composite.py -d holiday holiday/free.png -c 30 -g 6 -G games.txt
+```
 
 **NOTE: The images in this holiday directory are likely copyright and are not
 valid for non-personal or commercial use.  The author of this package claims
