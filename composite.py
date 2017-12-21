@@ -11,6 +11,7 @@
 import os.path
 from PIL import Image, ImageFont, ImageDraw
 import random
+import datetime
 
 
 def file_fetch(dirRoot, gameName):
@@ -46,8 +47,8 @@ def generate_montage(fileSet, fileFree, nameFile, colKeys=None,
     # height = sum(image.size[1] + margin for image in images)
     colorBack = (255, 255, 255, 0)
     colorText = (0, 0, 0, 255)
-    montage = Image.new(mode='RGBA', size=((cellSize + marginSize) * (cellCount),
-                                           (cellSize + marginSize) * (cellCount + 1)), color=colorBack)
+    montage = Image.new(mode='RGBA', size=((int)((cellSize + marginSize) * cellCount),
+                                           (int)((cellSize + marginSize) * (cellCount + 1.1))), color=colorBack)
 
     # font = ImageFont.truetype("resources/HelveticaNeueLight.ttf", 16)
     # font = ImageFont.load_default()
@@ -101,6 +102,13 @@ def generate_montage(fileSet, fileFree, nameFile, colKeys=None,
         text_x, text_y = font.getsize(textCard)
         draw = ImageDraw.Draw(montage)
         draw.text((montage.width - text_x, 0), textCard, font=font, fill=colorText)
+    # vanity tag for others to use!
+    textCard = "BingoGenerator - {:} (https://github.com/ezavesky/bingo_generator)".format(
+               datetime.date.today().strftime('%b %Y'))
+    font = ImageFont.truetype("arial.ttf", 15)
+    text_x, text_y = font.getsize(textCard)
+    draw = ImageDraw.Draw(montage)
+    draw.text((montage.width - text_x, montage.height - text_y), textCard, font=font, fill=colorText)
 
     # montage = montage.crop((0, 0, max_x, max_y))
     montage.save(nameFile)
