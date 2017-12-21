@@ -99,3 +99,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Platform extras
+.DS_*
+
+# Created outputs
+card*.png
+game*.txt
